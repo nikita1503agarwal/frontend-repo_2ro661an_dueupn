@@ -1,28 +1,42 @@
-import { useState } from 'react'
+import { Routes, Route, NavLink } from 'react-router-dom'
+import Sidebar from './components/Sidebar'
+import Topbar from './components/Topbar'
+import Dashboard from './components/Dashboard'
+import Patients from './components/Patients'
+import Appointments from './components/Appointments'
+import Billing from './components/Billing'
+import Inpatient from './components/Inpatient'
+import Pharmacy from './components/Pharmacy'
+import Laboratory from './components/Laboratory'
+import Mobile from './components/Mobile'
 
-function App() {
-  const [count, setCount] = useState(0)
-
+function Container({ children }) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          Vibe Coding Platform
-        </h1>
-        <p className="text-gray-600 mb-6">
-          Your AI-powered development environment
-        </p>
-        <div className="text-center">
-          <button
-            onClick={() => setCount(count + 1)}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-          >
-            Count is {count}
-          </button>
-        </div>
+    <div className="pl-72 pt-16 min-h-screen bg-gradient-to-br from-slate-50 to-teal-50 dark:from-slate-950 dark:to-slate-900">
+      <div className="p-6">
+        {children}
       </div>
     </div>
   )
 }
 
-export default App
+export default function App() {
+  return (
+    <div>
+      <Sidebar />
+      <Topbar />
+      <Container>
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/patients" element={<Patients />} />
+          <Route path="/appointments" element={<Appointments />} />
+          <Route path="/billing" element={<Billing />} />
+          <Route path="/inpatient" element={<Inpatient />} />
+          <Route path="/pharmacy" element={<Pharmacy />} />
+          <Route path="/laboratory" element={<Laboratory />} />
+          <Route path="/mobile" element={<Mobile />} />
+        </Routes>
+      </Container>
+    </div>
+  )
+}
